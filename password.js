@@ -14,6 +14,12 @@
         // If type is 'words', length indicates the number of words to be concatenated to make a password.
         const password = (type, length, segmentLength) => {
             const hex = (length, segmentLength) => {
+                if (!length) {
+                    length = 6;
+                }
+                if (!segmentLength) {
+                    segmentLength = length;
+                }
                 const randomString = n => crypto.randomBytes(n).toString('hex').slice(0, n);
                 const hyphenate = str => {
                     let result = '';
@@ -27,6 +33,9 @@
             };
 
             const words = count => {
+                if (!count) {
+                    count = 1;
+                }
                 let result = '';
                 for (let i = 0; i < count; ++i) {
                     result += dictionary[Math.floor(Math.random() * dictionary.length)];
@@ -47,8 +56,8 @@
 
     const printPassword = () => {
         const type = process.argv[2];
-        const length = Number(process.argv[3]);
-        const segmentLength = process.argv.length > 3 ? Number(process.argv[4]) : undefined;
+        const length = (process.argv.length > 2) ? Number(process.argv[3]) : undefined;
+        const segmentLength = (process.argv.length > 3) ? Number(process.argv[4]) : undefined;
 
         console.log(module.exports.password(type, length, segmentLength));
     };
@@ -59,16 +68,17 @@
     Options:
         -h / help                       Shows this help message.
 
-        hex length (segmentLength)      Generates and prints a random hex string of [length] characters,
+        hex (length) (segmentLength)    Generates and prints a random hex string of [length] characters,
                                         and if the optional [segmentLength] argument is provided, the hex
-                                        string will have a '-' placed every [segmentLength] characters:
+                                        string will have a '-' placed every [segmentLength] characters. If
+                                        no arguments are provided, it is equivalent to hex 6 6.
                                             ex. > password hex 6 3
                                                 9ad-fd2
 
-        words count                     Generates and prints a password consisting of [count] random words
-                                        concatenated together. If [count] is 1, then a single random word
-                                        is printed.
-                                            ex. > password words 1
+        words (count)                   Generates and prints a password consisting of [count] random words
+                                        concatenated together. If [count] is 1, or not provided, then a
+                                        single random word is printed.
+                                            ex. > password words
                                                 piece
 `);
     };
