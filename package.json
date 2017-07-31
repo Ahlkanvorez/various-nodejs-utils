@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "Various command-line utilities in NodeJS",
   "main": "dist/index.js",
+  "keywords": [
+    "NodeJS",
+    "javascript",
+    "es6",
+    "utilities",
+    "command-line"
+  ],
   "repository": "https://github.com/Ahlkanvorez/various-nodejs-utils",
   "author": "Robert Mitchell <robert.mitchell36@gmail.com>",
   "license": "MIT",
