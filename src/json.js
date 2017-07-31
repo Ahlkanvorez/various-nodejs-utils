@@ -17,7 +17,7 @@ export const getProperty = (filename, propString) => {
     }).catch(err => {
         console.error(err);
     });
-}
+};
 
 const helpMessage =
 `
@@ -34,11 +34,11 @@ const helpMessage =
         json.member.path
             The desired sequence of accesses to get the data from JSON,
             separated by '.'
-                ex. json.js package.json scripts
+                ex. > ./json.js package.json scripts
                     { build: 'babel src/ -d dist/' }
-                ex. json.js package.json devDependencies.eslint
+                ex. > ./json.js package.json devDependencies.eslint
                     ^4.3.0
-                ex. json.js file.json someArray.5
+                ex. > ./json.js file.json someArray.5
                     the value of someArray[5]
 `;
 

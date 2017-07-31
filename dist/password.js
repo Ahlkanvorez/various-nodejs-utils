@@ -93,7 +93,7 @@ _https2.default.get('https://gist.githubusercontent.com/deekayen/4148741/raw/01c
     res.on('end', function () {
         dict = str.split('\n');
 
-        if (process.argv.length >= 2) {
+        if (process.argv.length > 2) {
             setImmediate(handleInput);
         }
     });

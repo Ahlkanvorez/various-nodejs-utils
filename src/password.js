@@ -91,7 +91,7 @@ https.get('https://gist.githubusercontent.com/deekayen/4148741/raw/01c6252ccc5b5
         res.on('end', () => {
             dict = str.split('\n');
 
-            if (process.argv.length >= 2) {
+            if (process.argv.length > 2) {
                 setImmediate(handleInput);
             }
         });
