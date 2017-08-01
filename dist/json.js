@@ -4,7 +4,6 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.getProperty = undefined;
 
 var _fs = require('fs');
 
@@ -16,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var readFile = (0, _util.promisify)(_fs2.default.readFile);
 
-var getProperty = exports.getProperty = function getProperty(filename, propString) {
+var getProperty = function getProperty(filename, propString) {
     return readFile(filename).then(function (contents) {
         var json = JSON.parse(contents);
         if (propString && propString.length > 0) {
@@ -51,9 +50,9 @@ var getProperty = exports.getProperty = function getProperty(filename, propStrin
     });
 };
 
-var helpMessage = '\n    json.js, a utility for extracting particular members of a JSON file from the\n             command line.\n\n    Usage: ./json.js path/to/file.json some.member.path\n        or node json.js path/to/file.json some.member.path\n\n    Options:\n        --help, -h\n            Prints this message.\n        \n        json.member.path\n            The desired sequence of accesses to get the data from JSON,\n            separated by \'.\'\n                ex. json.js package.json scripts\n                    { build: \'babel src/ -d dist/\' }\n                ex. json.js package.json devDependencies.eslint\n                    ^4.3.0\n                ex. json.js file.json someArray.5\n                    the value of someArray[5]\n';
+var helpMessage = '\n    json.js, a utility for extracting particular members of a JSON file from the\n             command line.\n\n    Usage: ./json.js path/to/file.json some.member.path\n        or node json.js path/to/file.json some.member.path\n\n    Options:\n        --help, -h\n            Prints this message.\n        \n        json.member.path\n            The desired sequence of accesses to get the data from JSON,\n            separated by \'.\'\n                ex. > ./json.js package.json scripts\n                    { build: \'babel src/ -d dist/\' }\n                ex. > ./json.js package.json devDependencies.eslint\n                    ^4.3.0\n                ex. > ./json.js file.json someArray.5\n                    the value of someArray[5]\n';
 
-if (process.argv && process.argv[1].match(/json\.js/)) {
+if (process.argv && process.argv.length > 2 && process.argv[1].match(/json\.js/)) {
     if (!process.argv[2]) {
         console.log(helpMessage);
     } else if (['--help', '-h'].includes(process.argv[2])) {
@@ -62,3 +61,5 @@ if (process.argv && process.argv[1].match(/json\.js/)) {
         getProperty(process.argv[2], process.argv[3]).then(console.log).catch(console.error);
     }
 }
+
+exports.default = { getProperty: getProperty };

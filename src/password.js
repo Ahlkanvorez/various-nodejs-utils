@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import { randomBytes } from'crypto';
+import { randomBytes } from 'crypto';
 import https from 'https';
 
 let dict = [];
 
-export const hex = (length = 6) => (segmentLength = 3) => {
+const hex = (length = 6) => (segmentLength = 3) => {
     const randomString = n => randomBytes(n).toString('hex').slice(0, n);
     const hyphenate = str => {
         let result = '';
@@ -13,11 +13,11 @@ export const hex = (length = 6) => (segmentLength = 3) => {
             result += `${str.slice(i, i + segmentLength)}-`;
         }
         return result.slice(0, -1);
-    }
+    };
     return hyphenate(randomString(length));
 };
 
-export const words = (count = 1, dictionary = dict) => {
+const words = (count = 1, dictionary = dict) => {
     let result = '';
     for (let i = 0; i < count; ++i) {
         result += dictionary[Math.floor(Math.random() * dictionary.length)];
@@ -31,8 +31,8 @@ export const words = (count = 1, dictionary = dict) => {
 //   a segment.
 // If type is 'words', length indicates the number of words to be
 //  concatenated to make a password.
-export const password = (type, length, segmentLength, dictionary) => {
-    switch(type) {
+const password = (type, length, segmentLength, dictionary) => {
+    switch (type) {
         case 'hex':
             return hex(length)(segmentLength);
         case 'words':
@@ -97,3 +97,5 @@ https.get('https://gist.githubusercontent.com/deekayen/4148741/raw/01c6252ccc5b5
         });
     }
 );
+
+export default { hex, words, password };

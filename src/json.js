@@ -5,7 +5,7 @@ import { promisify } from 'util';
 
 const readFile = promisify(fs.readFile);
 
-export const getProperty = (filename, propString) => {
+const getProperty = (filename, propString) => {
     return readFile(filename).then(contents => {
         let json = JSON.parse(contents);
         if (propString && propString.length > 0) {
@@ -19,8 +19,7 @@ export const getProperty = (filename, propString) => {
     });
 };
 
-const helpMessage =
-`
+const helpMessage = `
     json.js, a utility for extracting particular members of a JSON file from the
              command line.
 
@@ -42,7 +41,8 @@ const helpMessage =
                     the value of someArray[5]
 `;
 
-if (process.argv && process.argv[1].match(/json\.js/)) {
+if (process.argv && process.argv.length > 2
+        && process.argv[1].match(/json\.js/)) {
     if (!process.argv[2]) {
         console.log(helpMessage);
     } else if ([ '--help', '-h' ].includes(process.argv[2])) {
@@ -53,3 +53,5 @@ if (process.argv && process.argv[1].match(/json\.js/)) {
             .catch(console.error);
     }
 }
+
+export default { getProperty };

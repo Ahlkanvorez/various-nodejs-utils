@@ -1,4 +1,4 @@
-import json from 'json';
-import password from 'password';
+import json from './json';
+import password from './password';
 
-export { json, password };
+export default { json, password };

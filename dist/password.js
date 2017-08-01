@@ -4,7 +4,6 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.password = exports.words = exports.hex = undefined;
 
 var _crypto = require('crypto');
 
@@ -16,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var dict = [];
 
-var hex = exports.hex = function hex() {
+var hex = function hex() {
     var length = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 6;
     return function () {
         var segmentLength = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 3;
@@ -35,7 +34,7 @@ var hex = exports.hex = function hex() {
     };
 };
 
-var words = exports.words = function words() {
+var words = function words() {
     var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
     var dictionary = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : dict;
 
@@ -52,7 +51,7 @@ var words = exports.words = function words() {
 //   a segment.
 // If type is 'words', length indicates the number of words to be
 //  concatenated to make a password.
-var password = exports.password = function password(type, length, segmentLength, dictionary) {
+var password = function password(type, length, segmentLength, dictionary) {
     switch (type) {
         case 'hex':
             return hex(length)(segmentLength);
@@ -98,3 +97,5 @@ _https2.default.get('https://gist.githubusercontent.com/deekayen/4148741/raw/01c
         }
     });
 });
+
+exports.default = { hex: hex, words: words, password: password };
