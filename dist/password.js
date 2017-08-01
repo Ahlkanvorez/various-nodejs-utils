@@ -20,6 +20,12 @@ var hex = function hex() {
     return function () {
         var segmentLength = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 3;
 
+        if (segmentLength <= 0) {
+            segmentLength = 3;
+        }
+        if (length <= 0) {
+            length = 6;
+        }
         var randomString = function randomString(n) {
             return (0, _crypto.randomBytes)(n).toString('hex').slice(0, n);
         };

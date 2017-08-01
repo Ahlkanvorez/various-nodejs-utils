@@ -6,6 +6,12 @@ import https from 'https';
 let dict = [];
 
 const hex = (length = 6) => (segmentLength = 3) => {
+    if (segmentLength <= 0) {
+        segmentLength = 3;
+    }
+    if (length <= 0) {
+        length = 6;
+    }
     const randomString = n => randomBytes(n).toString('hex').slice(0, n);
     const hyphenate = str => {
         let result = '';

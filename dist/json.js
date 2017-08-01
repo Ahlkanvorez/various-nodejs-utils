@@ -15,6 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var readFile = (0, _util.promisify)(_fs2.default.readFile);
 
+// Note: This returns a Promise which passes the json into then(...)
 var getProperty = function getProperty(filename, propString) {
     return readFile(filename).then(function (contents) {
         var json = JSON.parse(contents);
