@@ -5,6 +5,7 @@ import { promisify } from 'util';
 
 const readFile = promisify(fs.readFile);
 
+// Note: This returns a Promise which passes the json into then(...)
 const getProperty = (filename, propString) => {
     return readFile(filename).then(contents => {
         let json = JSON.parse(contents);
